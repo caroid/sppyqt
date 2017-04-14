@@ -156,11 +156,12 @@ class CWriter(QThread):
    def start(self, ser, cmd = "", priority = QThread.InheritPriority):
       self.ser = ser
       self.cmd = cmd
+      #self.ser.write(str(self.cmd))
       QThread.start(self, priority)
       
    def run(self):
       try:
-         self.ser.write(str(self.cmd))
+         self.ser.write(str(self.cmd)+'\n')
       except:
          errMsg = "Writer thread is terminated unexpectedly."
          self.emit(SIGNAL("error(QString)"), errMsg)
